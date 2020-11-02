@@ -38,16 +38,28 @@
                     <li><a href="#">Nuts</a></li>
                     <li><a href="#">Gluten full</a></li>
                     <li>
-                        <a href="/login.php" class="btn btn-warning navbar-btn">
+                        <a href="/cart.php" class="btn btn-warning navbar-btn">
                             <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
                             Cart
                         </a>
                     </li>
+                    <?php
+                    if (!empty($_SESSION['loginname'])) { ?>
+                        <p><?= 'Welcome, ' . $_SESSION['loginname'] . ' !'; ?></p>
+                        <a href="logout.php">Se déconnecter</a>
+                        <?php
+                    } else { ?>
+                        <a href="login.php">Se connecter</a>
+                        <?php
+                    } ?>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
     <div class="container-fluid text-right">
-        <strong>Hello Wilder !</strong>
+        <?php
+        if (!empty($_SESSION['loginname'])) { ?>
+            <strong>Hello <?= ' ' . $_SESSION['loginname'] ?> !</strong>
+        <?php } ?>
     </div>
 </header>

@@ -1,44 +1,33 @@
-<?php
-require 'inc/head.php'; ?>
+<?php require 'inc/head.php';
+session_start();
+
+define('LOGIN', 'totodanslebato');
+$errorMessage = '';
+
+if (!empty($_POST)) {
+    if (!empty($_POST['loginname'])) {
+        if ($_POST['loginname'] !== LOGIN) {
+            $errorMessage = 'Mauvais login !';
+        } else {
+            $_SESSION['loginname'] = LOGIN;
+            header('Location: index.php');
+            exit();
+        }
+    } else {
+        $errorMessage = 'Veuillez inscrire votre identifiant svp !';
+    }
+}
+
+?>
 <div class="container" style="margin-top:40px">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <?php
-                    define('LOGIN','toto');
-                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        foreach ($_POST as $name => $input) {
-                            $data[$name] = trim($input);
-                        }
-                        $errorMessage = '';
-
-                        if (!empty($_POST)) {
-
-                            if (!empty($_POST['login'])) {
-
-                                if ($_POST['login'] !== LOGIN) {
-                                    $errorMessage = 'Mauvais login !';
-                                     ?> <p> <?php echo $errorMessage ?> </p> <?php
-                                } else {
-                                    session_start();
-                                    $_SESSION['login'] = LOGIN;
-                                    header('Location: http://localhost:8000/cart.php');
-                                    exit();
-
-                                }
-                            } elseif(empty($_POST['login'])) {
-                                $errorMessage = 'Veuillez inscrire vos identifiants svp !';
-                                ?> <p> <?php echo $errorMessage ?> </p> <?php
-                            }
-                        }
-                    }
-                    ?>
-
                     <strong> Sign in to continue</strong>
                 </div>
                 <div class="panel-body">
-                    <form role="form" action="#" method="POST">
+                    <form role="form" action="login.php" method="POST">
                         <fieldset>
                             <div class="row">
                                 <div class="center-block">
@@ -54,7 +43,7 @@ require 'inc/head.php'; ?>
                                             <span class="input-group-addon">
                                               <i class="glyphicon glyphicon-user"></i>
                                             </span>
-                                            <input class="form-control" placeholder="Username" name="login"
+                                            <input class="form-control" placeholder="Username" name="loginname"
                                                    type="text" autofocus>
                                         </div>
                                     </div>
@@ -74,4 +63,3 @@ require 'inc/head.php'; ?>
     </div>
 </div>
 <?php require 'inc/foot.php'; ?>
-
