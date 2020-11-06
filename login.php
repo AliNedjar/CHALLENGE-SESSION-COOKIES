@@ -1,22 +1,4 @@
 <?php require 'inc/head.php';
-session_start();
-
-define('LOGIN', 'totodanslebato');
-$errorMessage = '';
-
-if (!empty($_POST)) {
-    if (!empty($_POST['loginname'])) {
-        if ($_POST['loginname'] !== LOGIN) {
-            $errorMessage = 'Mauvais login !';
-        } else {
-            $_SESSION['loginname'] = LOGIN;
-            header('Location: index.php');
-            exit();
-        }
-    } else {
-        $errorMessage = 'Veuillez inscrire votre identifiant svp !';
-    }
-}
 
 ?>
 <div class="container" style="margin-top:40px">

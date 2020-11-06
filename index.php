@@ -1,11 +1,7 @@
 <?php
 
-session_start();
-
 require 'inc/data/products.php';
 require 'inc/head.php';
-
-$_SESSION['cookie'] = $_GET['add_to_cart'];
 
 ?>
 

@@ -1,3 +1,30 @@
+<?php
+
+session_start();
+
+define('LOGIN', 'totodanslebato');
+$errorMessage = '';
+
+if (!empty($_POST)) {
+    if (!empty($_POST['loginname'])) {
+        if ($_POST['loginname'] !== LOGIN) {
+            $errorMessage = 'Mauvais login !';
+        } else {
+            $_SESSION['loginname'] = LOGIN;
+            header('Location: index.php');
+            exit();
+        }
+    } else {
+        $errorMessage = 'Veuillez inscrire votre identifiant svp !';
+    }
+}
+
+if (!empty($_GET['add_to_cart'])) {
+    $_SESSION['cookie'] = $_GET['add_to_cart'];
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
